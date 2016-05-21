@@ -42,4 +42,55 @@ router.post('/', function (req, res) {
   });
 });
 
+router.post('/:id', function (req, res) {
+  var id = req.params.id;
+   console.log(id);
+   pg.connect(connectionString, function (err, client, done) {
+     if (err) {
+       console.log(err);
+      res.sendStatus(500);
+     }
+
+    client.query('UPDATE tasklist SET complete = true WHERE id = $1',
+                  [id],
+                   function (err, result) {
+                     done();
+
+                     if (err) {
+                      console.log(err);
+                      res.sendStatus(500);
+                      return;
+                   }
+
+                   res.sendStatus(200);
+                  });
+   });
+ });
+
+ router.delete('/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+
+    client.query('DELETE FROM tasklist ' +
+                  'WHERE id = $1',
+                   [id],
+                 function (err, result) {
+                   done();
+
+                   if (err) {
+                     console.log(err);
+                     res.sendStatus(500);
+                     return;
+                   }
+
+                   res.sendStatus(200);
+                 });
+  });
+});
+
 module.exports = router;

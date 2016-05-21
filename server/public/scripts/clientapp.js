@@ -6,7 +6,11 @@ $('#task').on('submit', addTask);
 
 //Mark tasks complete
 $('#taskList').on('click', '.complete', taskComplete);
-  console.log('hi');
+
+//Delete task
+$('#taskList').on('click', '.delete', deleteTask);
+
+
 });
 
 //AJAX functions
@@ -17,12 +21,17 @@ function getTasks () {
       success: function (tasks) {
         $('#taskList').empty();
           tasks.forEach(function (task) {
+            if (task.complete === true) {
 
+            $container = $('<div class="task_done">' + task.task_name + ': ' + task.task_deadline + '</div>');
+            $container.append('<button class="delete">Delete</button>');
+
+          } else {
             $container = $('<div class="task">' + task.task_name + ': ' + task.task_deadline + '</div>');
-
-              $container.data('taskID', task.id);
-              $container.append('<button class="complete">Complete</button>');
-        $container.append('<button class="delete">Delete</button>');
+            $container.append('<button class="complete">Complete</button>');
+            $container.append('<button class="delete">Delete</button>');
+          }
+        $container.data('taskID', task.id);
         $('#taskList').append($container);
           });
 
@@ -57,16 +66,19 @@ function taskComplete (event) {
   event.preventDefault();
   $(this).parent().addClass('task_done');
   var taskID = getTaskId($(this));
-  var complete = true;
+
   $(this).remove();
 
+}
+
+function deleteTask(event) {
+  event.preventDefault();
+  var taskId = getTaskId($(this));
   $.ajax({
-    type: 'PUT',
-    url: '/tasks/' + taskID,
-    data: complete,
+    type: 'DELETE',
+    url: '/tasks/' + taskId,
     success: function (data) {
       getTasks();
-    }
+    },
   });
-
 }
