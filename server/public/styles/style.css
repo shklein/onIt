@@ -1,0 +1,42 @@
+body {
+  text-align: center;
+  font-family: 'andale mono', sans-serif;
+  background-color: tan;
+  background-image: url(./images/corkboard-texture.jpg);
+  background-size: cover;
+}
+
+header {
+  color: chocolate;
+  text-align: center;
+  background-color: wheat;
+  padding: auto;
+}
+
+#task_name {
+  padding: 10px 10px;
+}
+
+.task {
+  background-color: lightgreen;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'andale mono', sans-serif;
+  font-size: 16px;
+}
+
+.task_done {
+  background-color: turquoise;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'comic sans', sans-serif;
+  font-size: 16px;
+  margin: 10px;
+}
