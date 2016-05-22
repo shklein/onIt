@@ -23,7 +23,7 @@ function getTasks () {
           tasks.forEach(function (task) {
             if (task.complete === true) {
 
-            $container = $('<div class="task_done">' + task.task_name + ': ' + task.task_deadline + '</div>');
+            $container = $('<div class="task_done">' + task.task_name + '\nDo by: ' + task.task_deadline + '</div>');
             $container.append('<button class="delete">Delete</button>');
 
           } else {
@@ -45,7 +45,9 @@ function addTask (event) {
 
   $.each($('#task').serializeArray(), function (i, field) {
     task[field.name] = field.value;
+
   });
+  console.log(task.deadline)
   $.ajax({
     type: 'POST',
     url: '/tasks',
@@ -83,6 +85,8 @@ function taskComplete (event) {
 function deleteTask(event) {
   event.preventDefault();
   var taskId = getTaskId($(this));
+  var sure = confirm('Are you sure you want to delete this task?');
+  if (sure == true) {
   $.ajax({
     type: 'DELETE',
     url: '/tasks/' + taskId,
@@ -90,4 +94,5 @@ function deleteTask(event) {
       getTasks();
     },
   });
+}
 }
