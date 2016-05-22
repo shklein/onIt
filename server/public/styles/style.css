@@ -50,3 +50,8 @@ header {
 .delete {
   margin-top: 125px;
 }
+img {
+  height: 100px;
+  width: auto;
+  float: left;
+}
