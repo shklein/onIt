@@ -66,8 +66,17 @@ function taskComplete (event) {
   event.preventDefault();
   $(this).parent().addClass('task_done');
   var taskID = getTaskId($(this));
-
+  var complete = {'complete': true,
+                  'id': taskID}
   $(this).remove();
+  $.ajax({
+    type: 'PUT',
+    url: '/tasks/' + taskID,
+    data: complete,
+    success: function (data) {
+      getTasks();
+    }
+  })
 
 }
 

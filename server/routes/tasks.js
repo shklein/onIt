@@ -42,30 +42,32 @@ router.post('/', function (req, res) {
   });
 });
 
-router.post('/:id', function (req, res) {
+router.put('/:id', function (req, res) {
   var id = req.params.id;
-   console.log(id);
-   pg.connect(connectionString, function (err, client, done) {
-     if (err) {
-       console.log(err);
+  var complete = req.complete;
+  console.log(req.complete);
+
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
       res.sendStatus(500);
-     }
+    }
 
-    client.query('UPDATE tasklist SET complete = true WHERE id = $1',
-                  [id],
-                   function (err, result) {
-                     done();
+    client.query('UPDATE tasklist ' +
+                  'SET complete = $1 ' +
+                  'WHERE id = $2',
+                   [complete, id],
+                 function (err, result) {
+                   done();
 
-                     if (err) {
-                      console.log(err);
-                      res.sendStatus(500);
-                      return;
+                   if (err) {
+                     res.sendStatus(500);
+                     return;
                    }
 
                    res.sendStatus(200);
-                  });
-   });
- });
+                 });
+  });
+});
 
  router.delete('/:id', function (req, res) {
   var id = req.params.id;
