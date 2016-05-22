@@ -23,7 +23,7 @@ function getTasks () {
           tasks.forEach(function (task) {
             if (task.complete === true) {
 
-            $container = $('<div class="task_done">' + task.task_name + '\nDo by: ' + task.task_deadline + '</div>');
+            $container = $('<div class="task_done">' + task.task_name + ': ' + task.task_deadline + '</div>');
             $container.append('<button class="delete">Delete</button>');
 
           } else {
