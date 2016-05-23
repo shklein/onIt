@@ -12,10 +12,7 @@ header {
   background-color: wheat;
   padding: auto;
   padding: 5px;
-}
-
-#task_name {
-  padding: 10px 10px;
+  margin: 5px;
 }
 
 .task {
@@ -23,11 +20,10 @@ header {
   display: inline-block;
   height: 200px;
   width: 200px;
-  margin: 10px;
+  margin: 20px;
   border-radius: 10px;
   text-align: center;
   font-family: 'andale mono', sans-serif;
-  font-size: 16px;
 }
 
 .task_done {
@@ -35,10 +31,9 @@ header {
   display: inline-block;
   height: 200px;
   width: 200px;
-  border-radius: 10px;
+  border-radius: 20px;
   text-align: center;
   font-family: 'andale mono', sans-serif;
-  font-size: 16px;
   margin: 10px;
 }
 
@@ -48,10 +43,5 @@ header {
 }
 
 .delete {
-  margin-top: 125px;
-}
-img {
-  height: 100px;
-  width: auto;
-  float: left;
+  margin-top: 125x;
 }
