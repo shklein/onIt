@@ -47,7 +47,6 @@ function addTask (event) {
     task[field.name] = field.value;
 
   });
-  console.log(task.deadline)
   $.ajax({
     type: 'POST',
     url: '/tasks',
